@@ -6,6 +6,7 @@ import student from "../../Assets/Projects/student.PNG";
 import restaurant from "../../Assets/Projects/restaurant.PNG";
 import library from "../../Assets/Projects/library.PNG";
 import surokkha from "../../Assets/Projects/surokkha.PNG";
+import portfolio from "../../Assets/Projects/portfolio.PNG";
 
 function Projects() {
   return (
@@ -31,11 +32,11 @@ function Projects() {
 
           <Col md={4} className="project-card">
             <ProjectCard
-              imgPath={surokkha}
+              imgPath={portfolio}
               isBlog={false}
               title="Portfolio"
-              description=""
-              link="https://surokka.nuisters.com/"
+              description="this is my portfolio project. it's a full-stack web app. I can get the message and email from here. I'm using ReactJS, NodeJS, ExpressJs, and MySQL to build this project."
+              link="https://rahat.nuisters.com/"
             />
           </Col>
 

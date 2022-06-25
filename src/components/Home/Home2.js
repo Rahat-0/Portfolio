@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Spinner } from "react-bootstrap";
 import myImg from "../../Assets/avatar.png";
 import Tilt from "react-parallax-tilt";
 import {
@@ -8,19 +8,38 @@ import {
   AiFillInstagram,
 } from "react-icons/ai";
 import { FaLinkedinIn } from "react-icons/fa";
+import axios from "axios";
 
 function Home2() {
 
+  const [isloading, setIsloading] = useState(false)
   const [isSubmit, setIsSubmit] = useState(false)
+  const [error, setError] = useState(false)
   const [data, setData] = useState({
-    email : '',
-    message : ''
+    email: '',
+    message: ''
   })
 
   const formHandler = (e) => {
     e.preventDefault()
-    setIsSubmit(true)
-    alert(data.message)
+    setIsloading(true)
+    console.log(data.email, data.message)
+    axios.post('https://api.rahat.nuisters.com/api/insert',
+      { email: data.email, message: data.message }
+    )
+      .then((res) => {
+        const result = res.data;
+        if (result.success) {
+          setIsSubmit(true)
+        } else {
+          setError(true)
+        }
+        setIsloading(false)
+      })
+      .catch((err) => {
+        setError(true)
+        setIsloading(false)
+      })
   }
 
   return (
@@ -78,15 +97,17 @@ function Home2() {
               </h2>
               :
               <Form onSubmit={formHandler} className="home-about-form">
+                {error && <p className="purple">Already send a message from this mail!</p>}
                 <Form.Group className="mb-3 " controlId="exampleForm.ControlInput1">
-                  <Form.Control value={data.email} onChange={(e)=> setData({email : e.target.value})} required type="email" placeholder="Enter your email" />
+                  <Form.Control value={data.email} onChange={(e) => setData({ ...data, email: e.target.value })} required type="email" placeholder="Enter your email" />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                  <Form.Control value={data.message} onChange={(e)=> setData({message : e.target.value})} required as="textarea" placeholder="Message" rows={4} />
+                  <Form.Control value={data.message} onChange={(e) => setData({ ...data, message: e.target.value })} required as="textarea" placeholder="Message" rows={4} />
                 </Form.Group>
                 <Button className="mb-3" type="submit">
                   SEND
                 </Button>
+              { isloading && <Spinner animation="border " variant="danger"></Spinner>}
               </Form>
             }
             <h1>FIND ME ON</h1>

@@ -481,6 +481,53 @@ button:focus {
 .blockquote-footer {
   color: #c08888 !important;
 }
+
+
+/* --------- */
+/* admin-table */
+/* --------- */
+.table-section{
+  position: relative !important;
+  padding-top: 150px !important;
+  padding-bottom: 30px !important;
+}
+
+.table-section table{
+  background-color: #2b0b0b !important;
+  color: white;
+  border: #db6b6b 1px solid;
+}
+table tbody tr td{
+  color: white !important;
+}
+table tbody tr:hover{
+  background: #000000;
+  color : white !important;
+}
+
+table tbody tr td:nth-child(3){
+  text-align: left;
+}
+
+table tbody tr td input{
+  border: none;
+  background: transparent;
+  color: white;
+  outline: none;
+  }
+
+  /* --------- */
+/* admin-messageone */
+/* --------- */
+.message-section{
+  padding-top: 120px !important;
+  padding-bottom: 30px !important;
+  text-align: left !important;
+  min-height: 91vh !important;
+}
+.message-btn .btn{
+  margin-right : 2rem !important;
+}
 /* --------- */
 /* Projects */
 /* --------- */

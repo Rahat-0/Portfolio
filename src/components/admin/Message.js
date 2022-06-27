@@ -1,33 +1,30 @@
 import React, { useEffect, useState } from 'react'
 import { Alert, Container, ButtonGroup, Button } from 'react-bootstrap'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Particle from '../Particle'
+import Pre from '../Pre'
 
 function Message() {
-
-    const {email} = useParams()
+    const location = useLocation()
+    const [load, setLoad] = useState(true)
     const navigate = useNavigate()
+    
     const [data, setData] = useState({
         email : '',
         message : '',
         timeStamp : ''
     })
-    useEffect(() => {
-        axios.get(`https://api.rahat.nuisters.com/api/admin/one/${email}`)
-        .then((res) => {
-            console.log(res.data)
-            setData(res.data[0])
-        })
-        .catch(err => {
-            console.log(err)
-        })
-      
-    }, [])
 
+
+    useEffect(() => {
+        axios.put('https://api.rahat.nuisters.com/api/admin/seen', { email : location.state.email })
+        setData(location.state)
+        setLoad(false)
+    }, [location])
+    
     const deleteHandler = () => {
-        console.log(email)
-        axios.delete('https://api.rahat.nuisters.com/api/admin/delete', { data: { email }})
+        axios.delete('https://api.rahat.nuisters.com/api/admin/delete', { data: { email : data.email }})
         .then((res) => {
             console.log(res.data)
             navigate('/admin')
@@ -38,6 +35,7 @@ function Message() {
     }
     return (
         <Container className="message-section">
+            <Pre load = {load} />
             <Particle />
             <Alert variant="danger">
                 <Alert.Heading>{data.email} </Alert.Heading>

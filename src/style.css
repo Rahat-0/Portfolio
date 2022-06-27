@@ -509,11 +509,9 @@ table tbody tr td:nth-child(3){
   text-align: left;
 }
 
-table tbody tr td input{
-  border: none;
-  background: transparent;
-  color: white;
-  outline: none;
+table tbody tr td Link{
+  text-decoration: none !important;
+  color: white !important;
   }
 
   /* --------- */

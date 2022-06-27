@@ -42,7 +42,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/resume" element={<Resume />} /> 
           <Route path="/admin" element={<Table />} />
-          <Route path="/message/:email" element={<Message />} />
+          <Route path="/message" element={<Message />} />
           <Route path="*" element={<Navigate to="/"/>} />
         </Routes>
         <Footer />
